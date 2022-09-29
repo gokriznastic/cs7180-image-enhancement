@@ -69,12 +69,12 @@ style_weights = {'conv1_1': 1.,
 content_weight = args.content_weight  # alpha
 style_weight = args.style_weight  # beta
 
-target = transfer_style(args.steps, target, vgg, content_features, style_features, style_weights, style_grams, content_weight, style_weight)
+target = transfer_style(int(args.steps), target, vgg, content_features, style_features, style_weights, style_grams, content_weight, style_weight)
 
 # display content and final, target image
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 10))
-ax1.imshow(im_convert(content))
-ax2.imshow(im_convert(target))
+# fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 10))
+# ax1.imshow(im_convert(content))
+# ax2.imshow(im_convert(target))
 
 
 # save the target image

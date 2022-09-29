@@ -32,7 +32,6 @@ def transfer_style(steps, target, model, content_features, style_features, style
     for ii in range(1, steps+1):
         ## get the features from your target image
         ## Then calculate the content loss
-        print('Epoch: ', ii)
         target_features = get_features(target, model)
         content_loss = torch.mean((target_features['conv4_2'] - content_features['conv4_2'])**2)
 
@@ -68,6 +67,7 @@ def transfer_style(steps, target, model, content_features, style_features, style
 
         # display intermediate images and print the loss
         if  ii % show_every == 0:
+            print('Epoch: ', ii)
             print('Total loss: ', total_loss.item())
         #     plt.imshow(im_convert(target))
         #     plt.show()
