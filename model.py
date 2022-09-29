@@ -1,3 +1,7 @@
+''' Gopal Krishna
+09/26/2022
+CS 7180 Advanced Perception '''
+
 import os
 
 import torch
@@ -5,6 +9,8 @@ from torchvision import models, transforms
 
 
 def load_model(device):
+    """ Load VGGNet as used by Gatys et al (2016). """
+
     vgg = models.vgg19(pretrained=True).features
 
     # freeze all VGG parameters since we're only optimizing the target image
@@ -17,8 +23,7 @@ def load_model(device):
 
 def get_features(image, model, layers=None):
     """ Run an image forward through a model and get the features for
-        a set of layers. Default layers are for VGGNet matching Gatys et al (2016)
-    """
+        a set of layers. Default layers are for VGGNet matching Gatys et al (2016). """
     ## completing the mapping layer names of PyTorch's VGGNet to names from the paper
     ## we need the layers for the content and style representations of an image
     if layers is None:

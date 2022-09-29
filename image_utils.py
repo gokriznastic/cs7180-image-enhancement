@@ -1,3 +1,7 @@
+''' Gopal Krishna
+09/26/2022
+CS 7180 Advanced Perception '''
+
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
@@ -7,8 +11,8 @@ from torchvision import transforms
 
 # helper function to load image given the image filepath
 def load_image(img_path, max_size=800, shape=None):
-    ''' Load in and transform an image, making sure the image
-       is <= 800 pixels in the x-y dims.'''
+    """ Load in and transform an image, making sure the image
+       is <= 800 pixels in the x-y dims. """
 
     image = Image.open(img_path).convert('RGB')
 

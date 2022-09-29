@@ -1,3 +1,7 @@
+''' Gopal Krishna
+09/26/2022
+CS 7180 Advanced Perception '''
+
 from argparse import ArgumentParser
 
 import matplotlib.pyplot as plt
@@ -40,8 +44,8 @@ assert content.size() == style.size()
 
 # display_content_style_images(content, style)
 
+# load the model
 vgg = load_model(device)
-
 print(vgg)
 
 # get content and style features only once before forming the target image
@@ -52,8 +56,6 @@ style_features = get_features(style, vgg)
 style_grams = {layer: gram_matrix(style_features[layer]) for layer in style_features}
 
 # create a third "target" image and prep it for change
-# it is a good idea to start of with the target as a copy of our *content* image
-# then iteratively change its style
 target = content.clone().requires_grad_(True).to(device)
 
 # weights for each style layer
@@ -65,16 +67,17 @@ style_weights = {'conv1_1': 1.,
                  'conv4_1': 0.4,
                  'conv5_1': 0.2}
 
-# you may choose to leave these as is
+# weights to control influence of style or content images
 content_weight = args.content_weight  # alpha
 style_weight = args.style_weight  # beta
 
+# perform style transfer for a given set of iterations/steps
 target = transfer_style(int(args.steps), target, vgg, content_features, style_features, style_weights, style_grams, content_weight, style_weight)
 
 # display content and final, target image
-# fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 10))
-# ax1.imshow(im_convert(content))
-# ax2.imshow(im_convert(target))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 10))
+ax1.imshow(im_convert(content))
+ax2.imshow(im_convert(target))
 
 
 # save the target image

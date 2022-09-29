@@ -1,14 +1,18 @@
+''' Gopal Krishna
+09/27/2022
+CS 7180 Advanced Perception '''
+
 import numpy as np
 import torch
 import torch.optim as optim
 
-from model import get_features
 from image_utils import im_convert
+from model import get_features
+
 
 def gram_matrix(tensor):
     """ Calculate the Gram Matrix of a given tensor
-        Gram Matrix: https://en.wikipedia.org/wiki/Gramian_matrix
-    """
+        Gram Matrix: https://en.wikipedia.org/wiki/Gramian_matrix. """
 
     ## get the batch_size, depth, height, and width of the Tensor
     batch_size, c, h, w = tensor.size()
@@ -22,8 +26,10 @@ def gram_matrix(tensor):
     return gram
 
 def transfer_style(steps, target, model, content_features, style_features, style_weights, style_grams, content_weight, style_weight):
+    """ Perform style transfer for given content and style images. """
+
     # for displaying the target image, intermittently
-    show_every = 300
+    show_every = 500
 
     # iteration hyperparameters
     optimizer = optim.Adam([target], lr=0.003)
@@ -69,7 +75,7 @@ def transfer_style(steps, target, model, content_features, style_features, style
         if  ii % show_every == 0:
             print('Epoch: ', ii)
             print('Total loss: ', total_loss.item())
-        #     plt.imshow(im_convert(target))
-        #     plt.show()
+            # plt.imshow(im_convert(target))
+            # plt.show()
 
     return target
